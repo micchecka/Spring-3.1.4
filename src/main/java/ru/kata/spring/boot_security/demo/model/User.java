@@ -9,9 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import javax.persistence.*;
 import javax.transaction.Transactional;
 import java.util.Collection;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "users")
@@ -29,7 +27,7 @@ public class User implements UserDetails {
     @Column
     private int age;
     @Column
-    private String username;
+    private String email;
 
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -54,13 +52,21 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(String firstName, String lastName, String password, int age, String username, Set<Role> roles) {
+    public User(String firstName, String lastName, String password, int age, String email, Set<Role> roles) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
         this.age = age;
-        this.username = username;
+        this.email = email;
         this.roles = roles;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getFirstName() {
@@ -89,7 +95,7 @@ public class User implements UserDetails {
 
 
     public void setUsername(String username) {
-        this.username = username;
+        this.email = username;
     }
 
     public Long getId() {
@@ -118,7 +124,7 @@ public class User implements UserDetails {
     }
 
     public String getUsername() {
-        return username;
+        return this.getEmail();
     }
 
     @Override

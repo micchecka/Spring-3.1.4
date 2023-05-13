@@ -6,6 +6,10 @@ spring:
     username: root
     password: MYSQL
 
+  spring:
+    resources:
+      static-locations: classpath:/static/
+
   mvc:
     hiddenmethod:
       filter:
